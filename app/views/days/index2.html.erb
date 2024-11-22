@@ -2,7 +2,36 @@
   <p><i class="fa-solid fa-arrow-left-long"> 日程一覧に戻る</i></p>
 <% end %>
 <h3>過去のシフト</h3>
-
+<!--作りたて-->
+<% @now.each do |day| %>
+  <div class="row">
+    <div class="col-6 col-md-4">
+      <%= link_to day_path(day.id) do %>
+        <button type="button" class="btn btn-link">
+          <i class="fa-solid fa-caret-right" style="color: black">　</i>
+          <%= day.start.month %>月<%= day.start.day %>日 ～
+          <%= day.finish.month %>月<%= day.finish.day %>日
+        </button>
+      <% end %>
+    </div>
+    <div class="col-1 col-md-2">
+          <%= day.limityan %>
+    </div>
+    <div class="col-2 col-md-2">
+          <%= link_to "締め切り", day_path(day.id), method: :patch %>
+    </div>
+    <div class="col-3 col-md-4">
+      <% if current_user.id == 1 %>
+        <%= link_to day_path(day.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
+          <button type="button" class="btn btn-outline-danger btn-sm">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<!--過去-->
 <% @day.order(start: :desc).each do |day| %>
   <div class="row">
     <div class="col-8 col-md-6">
