@@ -37,6 +37,16 @@ class DaysController < ApplicationController
     redirect_to days_path
   end
 
+  def update
+    day = Day.find(params[:id])
+    if day.limit == 1
+      day.update(limit: 0)
+    else
+      day.update(limit: 1)
+    end
+    redirect_to days_path
+  end
+
   private
   def day_params
     params.require(:day).permit(:start, :finish)

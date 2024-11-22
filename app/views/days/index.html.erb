@@ -28,7 +28,7 @@
     <% @day.order(start: :asc).each do |day| %>
     
       <div class="row">
-        <div class="col-8 col-md-6">
+        <div class="col-6 col-md-4">
           <%= link_to new_day_job_path(day.id) do %>
             <button type="button" class="btn btn-link">
               <i class="fa-solid fa-caret-right" style="color: black">　</i>
@@ -37,7 +37,13 @@
             </button>
           <% end %>
         </div>
-        <div class="col-4 col-md-6">
+        <div class="col-1 col-md-2">
+          <%= day.limit %>
+        </div>
+        <div class="col-2 col-md-2">
+          <%= link_to "締め切り", day_path(day.id), method: :patch %>
+        </div>
+        <div class="col-3 col-md-4">
           <% if current_user.id == 1 %>
             <%= link_to day_path(day.id), method: :delete, "data-confirm" => "本当に削除しますか？" do %>
               <button type="button" class="btn btn-outline-danger btn-sm">
