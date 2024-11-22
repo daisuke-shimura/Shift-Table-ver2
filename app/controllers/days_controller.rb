@@ -39,10 +39,10 @@ class DaysController < ApplicationController
 
   def update
     day = Day.find(params[:id])
-    if day.limit == 1
-      day.update(limit: 0)
+    if day.limityan == false
+      day.update(limityan: true)
     else
-      day.update(limit: 1)
+      day.update(limityan: false)
     end
     redirect_to days_path
   end
